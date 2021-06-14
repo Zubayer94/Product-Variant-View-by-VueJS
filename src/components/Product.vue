@@ -4,44 +4,20 @@
       <div class="row">
         <div class="col-lg-6 col-12 col-sm-6 col-md-6 p-0">
           <div class="big-img" style="display: flex; justify-content: center;">
-            <div class="image-magnifier img-thumbnail" id="myImg" style="position: relative; cursor: move;">
-              <img width="300" height="300" src="https://agbd.s3.amazonaws.com/media/images/product/None/1527/Pacific-Blue.jpg" class="image-magnifier__img">
+            <div  class="image-magnifier img-thumbnail" id="myImg" style="position: relative; cursor: move;">
+              <img width="300" height="300" :src="product.image" class="image-magnifier__img">
             </div>
+            <!-- <div class="spinner-border" role="status" style="margin-top: 40vh">
+              <span class="sr-only">Loading...</span>
+            </div> -->
           </div> 
-          <!-- <div class="small-img" style="padding: 10px 15px;">
-            <div class="VueCarousel">
-              <div class="VueCarousel-wrapper">
-                <div class="VueCarousel-inner" style="transform: translate(0px, 0px); transition: transform 0.5s ease 0s; flex-basis: 99.5px; visibility: visible; height: auto;">
-                  <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide slide images">
-                    <div class="img" style="cursor: pointer;">
-                      <img src="https://agbd.s3.amazonaws.com/media/images/product/None/1527/Pacific-Blue.jpg" alt="" class="img-thumbnails" style="height: 100px; width: 100px;">
-                    </div>
-                  </div>
-                  <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide slide images">
-                    <div class="img" style="cursor: pointer;">
-                      <img src="https://agbd.s3.amazonaws.com/media/images/product/None/1527/Gold_cAScyjz.jpg" alt="" class="img-thumbnails" style="height: 100px; width: 100px;">
-                    </div>
-                  </div>
-                  <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide slide images">
-                    <div class="img" style="cursor: pointer;">
-                      <img src="https://agbd.s3.amazonaws.com/media/images/product/None/1527/Silver_t8hfIIw.jpg" alt="" class="img-thumbnails" style="height: 100px; width: 100px;">
-                      </div>
-                  </div>
-                  <div tabindex="-1" aria-hidden="true" role="tabpanel" class="VueCarousel-slide slide images">
-                    <div class="img" style="cursor: pointer;">
-                      <img src="https://agbd.s3.amazonaws.com/media/images/product/None/1527/Graphite.jpg" alt="" class="img-thumbnails" style="height: 100px; width: 100px;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div> 
         <div class="col-lg-6 col-12 col-sm-6 col-md-6"> 
           <div class="text">
-            <img src="https://agbd.s3.amazonaws.com/media/brand_images/Apple_1.svg" alt="" style="width: 75px; cursor: pointer;"> <h2 style="font-size: 25px; color: rgb(18, 18, 18); font-weight: bold;">iPhone 12 Pro Max</h2> <!----> 
+            <img src="https://agbd.s3.amazonaws.com/media/brand_images/Apple_1.svg" alt="" style="width: 75px; cursor: pointer;"> 
+            <h2 style="font-size: 25px; color: rgb(18, 18, 18); font-weight: bold;">iPhone 12 Pro Max</h2> <!----> 
             <div>
-              <h4><span style="font-size: 20px;"><b>TK. 110500</b></span></h4> <!---->
+              <h4><span style="font-size: 20px;"><b>TK. {{product.charge}}</b></span></h4> <!---->
             </div> <!----> 
             <div class="form-group" style="margin-left: 20px; margin-bottom: 0px;">
               <input type="checkbox" id="emiCheck" true-value="true" class="form-check-input" style="margin-top: 7px;"> 
@@ -62,189 +38,72 @@
               <div class="d-flex" style="min-height: 50px;">
                 <p class="color"> Storage :</p> 
                 <div class="d-flex" style="flex-wrap: wrap;">
-                  <div>
-                    <div class="borders checked-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Storage">
-                          <div><a>
-                            <span id="128GB">128GB</span>
-                            </a>
+                  <template v-for="storage in storages" :key="storage.id">
+                    <div>
+                      <div :class="storage.id != pStorage ? 'default-text-item' : 'checked-text-item' " class="borders" style="margin-right: 10px; cursor: pointer;" @click="update('storage', storage.id)">
+                        <div class="gb">
+                          <div id="Storage">
+                            <a><span id="128GB">{{storage.value}}</span></a>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Storage">
-                          <div>
-                            <a><span id="256GB">256GB</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Storage">
-                          <div>
-                            <a><span id="512GB">512GB</span>
-                            </a>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </template>
                 </div>
               </div>
               <div class="d-flex" style="min-height: 50px;">
                 <p class="color"> Color :</p> 
                 <div class="d-flex" style="flex-wrap: wrap;">
-                  <div>
-                    <div class="borders  checked-item" style="cursor: pointer; margin-bottom: 5px;">
-                      <div data-toggle="tooltip" title="" class="gbr text-center" style="line-height: 29px; position: absolute; margin: 15% 13%; background-color: rgb(253, 238, 215);" data-original-title="Gold">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Gold_FDEED7"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div> 
-                      <div data-toggle="tooltip" title="" class="gbr d-none" style="line-height: 29px; position: absolute; background-color: rgb(253, 238, 215);" data-original-title="Gold">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Gold_FDEED7"></span>
-                            </a>
+                  <template v-for="color in colors" :key="color.id">
+                    <div>
+                      <div :class="color.id != pColor ? 'default-item' : 'checked-item' " class="borders" style="cursor: pointer; margin-bottom: 5px;" @click="update('color', color.id)">
+                        <div class="gbr text-center" style="line-height: 29px; position: absolute; margin: 15% 13%;" :style=" {background: '#' + color.value.split('_').pop()} ">
+                          <div id="Color">
+                            <a><span id="Gold_FDEED7"></span> </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-item" style="cursor: pointer; margin-bottom: 5px;">
-                      <div data-toggle="tooltip" title="" class="gbr text-center" style="line-height: 29px; position: absolute; margin: 15% 13%; background-color: rgb(49, 75, 86);" data-original-title="Pacific Blue">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Pacific_Blue_314B56"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div> 
-                      <div data-toggle="tooltip" title="" class="gbr d-none" style="line-height: 29px; position: absolute; background-color: rgb(49, 75, 86);" data-original-title="Pacific Blue">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Pacific_Blue_314B56"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-item" style="cursor: pointer; margin-bottom: 5px;">
-                      <div data-toggle="tooltip" title="" class="gbr text-center" style="line-height: 29px; position: absolute; margin: 15% 13%; background-color: rgb(74, 73, 70);" data-original-title="Graphite">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Graphite_4A4946"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div> 
-                      <div data-toggle="tooltip" title="" class="gbr d-none" style="line-height: 29px; position: absolute; background-color: rgb(74, 73, 70);" data-original-title="Graphite">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Graphite_4A4946"></span></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-item" style="cursor: pointer; margin-bottom: 5px;">
-                      <div data-toggle="tooltip" title="" class="gbr text-center" style="line-height: 29px; position: absolute; margin: 15% 13%; background-color: rgb(241, 241, 236);" data-original-title="Silver">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Silver_F1F1EC"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div> 
-                      <div data-toggle="tooltip" title="" class="gbr d-none" style="line-height: 29px; position: absolute; background-color: rgb(241, 241, 236);" data-original-title="Silver">
-                        <div id="Color">
-                          <div>
-                            <a><span id="Silver_F1F1EC"></span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </template>
                 </div>
               </div>
               <div class="d-flex" style="min-height: 50px;">
                 <p class="color"> Sim :</p> 
                 <div class="d-flex" style="flex-wrap: wrap;">
-                  <div>
-                    <div class="borders  checked-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Sim">
-                          <div>
-                            <a><span id="e-Sim">e-Sim</span>
-                            </a>
+                  <template v-for="sim in sims" :key="sim.id">
+                    <div>
+                      <div :class="sim.id != pSim ? 'default-text-item' : 'checked-text-item' " class="borders" style="margin-right: 10px; cursor: pointer;" @click="update('sim', sim.id)">
+                        <div class="gb">
+                          <div id="Sim">
+                              <a><span id="e-Sim">{{sim.value}}</span></a>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Sim">
-                          <div>
-                            <a><span id="Dual">Dual</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </template>
                 </div>
               </div>
               <div class="d-flex" style="min-height: 50px;">
                 <p class="color"> Region :</p> 
                 <div class="d-flex" style="flex-wrap: wrap;">
-                  <div>
-                    <div class="borders  checked-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Region">
-                          <div>
-                            <a><span id="Regular">Regular</span>
-                            </a>
+                  <template v-for="region in regions" :key="region.id">
+                    <div>
+                      <div :class="region.id != pRegion ? 'default-text-item' : 'checked-text-item' " class="borders" style="margin-right: 10px; cursor: pointer;" @click="update('region', region.id)">
+                        <div class="gb">
+                          <div id="Region">
+                            <a><span id="Regular">{{region.value}}</span></a>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="borders  default-text-item" style="margin-right: 10px; cursor: pointer;">
-                      <div class="gb">
-                        <div id="Region">
-                          <div>
-                            <a><span id="USA">USA</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                  </div>
+                  </template>
                 </div>
               </div>
             </div>
+            <span v-if="product.stock  <= 1" class="badge badge-warning">Out of Stock</span>
           </div>
         </div>
+        <p class="mt-5">For checking the data: {{product}} </p> 
       </div> <!---->
     </div>
   </div>
@@ -253,26 +112,68 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'HelloWorld',
+  name: 'Product',
   data() {
     return {
-      
+      pStorage: '',
+      pColor: '',
+      pSim: '',
+      pRegion: '',
+      loading: false,
     }
   },
   methods: {
     ...mapActions({
       getProductAttribute: 'products/getProductAttribute',
       getProduct: 'products/getProduct',
+      updatedProduct: 'products/updatedProduct',
     }),
+    setProductAtt() {
+      this.productAtt.forEach((item, index) => {
+        if (index == 0) this.pStorage = item;
+        else if (index == 1) this.pColor = item;
+        else if (index == 2) this.pSim = item;
+        else if (index == 3) this.pRegion = item;
+      });
+    },
+    handleUpdate(){
+      this.loading = true;
+      this.updatedProduct([this.pStorage, this.pColor, this.pSim, this.pRegion])
+      .then(() => this.loading = false)
+    },
+    update(type, value){
+      if (type == 'storage') {
+        this.pStorage = value;
+        this.handleUpdate();
+      }
+      else if (type == 'color') {
+        this.pColor = value;
+        this.handleUpdate();
+      }
+      else if (type == 'sim') {
+        this.pSim = value;
+        this.handleUpdate();
+      }
+      else if (type == 'region') {
+        this.pRegion = value;
+        this.handleUpdate();
+      }
+    }
   },
   computed: {
     ...mapState({
       product: state => state.products.product,
-    })
+      storages: state => state.products.storages,
+      colors: state => state.products.colors,
+      sims: state => state.products.sims,
+      regions: state => state.products.regions,
+      productAtt: state => state.products.product.attribute_combination,
+    }),
   },
   mounted() {
     this.getProductAttribute();
-    this.getProduct();
+    this.getProduct()
+    .then(() => this.setProductAtt())
   },
 }
 </script>
@@ -286,16 +187,49 @@ export default {
   display: block;
   margin-right: auto;
 }
-.default-item {
-    border: 1px solid #a9a9a9!important;
+.checked-item, .default-item {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    margin-left: 0;
+    margin-right: 10px;
+    position: relative;
+}
+.checked-item{
     border-radius: 50%;
+    border: 1px solid #e70000!important;
+    box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+}
+.default-item {
+    border-radius: 50%;
+    border: 1px solid #9a7676!important;
+    box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
 }
 .default-item:hover {
+    border-radius: 50%;
     border: 1px solid #e70000!important;
+    box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
+}
+
+element.style {
+    line-height: 29px;
+    position: absolute;
+    margin: 15% 13%;
+    background-color: rgb(253, 238, 215);
+}
+.gbr {
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid #b1b1b1;
+    border-radius: 50%;
+    top: -2px;
+    left: -1px;
 }
 .checked-item {
-    border: 1px solid #e70000!important;
     border-radius: 50%;
+    border: 1px solid #e70000!important;
     box-shadow: 0 0 3px 2px rgb(228 121 17 / 50%);
 }
 .default-text-item {
